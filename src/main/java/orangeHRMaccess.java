@@ -14,9 +14,11 @@ public class orangeHRMaccess {
         WebDriver driver = null;
         loginPage loginPage = new loginPage(driver);
         driver = new ChromeDriver();
-        driver.get("https://www.softwaretestinghelp.com/selenium-webdriver-commands-selenium-tutorial-17/");
-        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-        driver.findElement(By.xpath("//input[@type='text']")).sendKeys("Admin");
+        driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+        //closes on window
+        driver.close();
+        //closes everything
+        driver.quit();
 
 
 
