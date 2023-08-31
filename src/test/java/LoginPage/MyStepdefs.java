@@ -1,6 +1,7 @@
 package LoginPage;
 
 import com.ibm.icu.impl.UResource;
+import com.vladsch.flexmark.ext.tables.internal.TableJiraRenderer;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -17,7 +18,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 public class MyStepdefs {
 
@@ -512,5 +515,262 @@ public class MyStepdefs {
     public void iShouldSeeTheConfirmationMessageThatTheJobWasSuccessfullyAdded() throws InterruptedException {
         Thread.sleep(2001);
         driver.findElement(By.xpath("//p[normalize-space()='Successfully Saved']")).isDisplayed();
+    }
+
+    @And("I click on the profile picture")
+    public void iClickOnTheProfilePicture() throws InterruptedException {
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//div[@class='orangehrm-edit-employee-image']")).click();
+    }
+    @And("I add a picture")
+    public void iAddAPicture() throws InterruptedException {
+        Thread.sleep(5000);
+        String filePath="/Users/adinica/Desktop/AutoFrameworkBootcamp/picture/pictures/Screenshot 2023-08-23 at 14.31.16.png";
+        Thread.sleep(4500);
+        WebElement uploadFile = driver.findElement(By.xpath("//input[@type='file']"));
+        Thread.sleep(3000);
+        uploadFile.sendKeys(filePath);
+    }
+
+    @And("I click the Save button")
+    public void iClickTheSaveButton() throws InterruptedException {
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//button[normalize-space()='Save']")).click();
+    }
+
+    @Then("I can see that my profile picture has been updated")
+    public void iCanSeeThatMyProfilePictureHasBeenUpdated() throws InterruptedException {
+        Thread.sleep(2500);
+        driver.findElement(By.xpath("//p[normalize-space()='Successfully Updated']")).isDisplayed();
+    }
+
+    @Given("I click Recruitment link from menu")
+    public void iClickRecruitmentLinkFromMenu() throws InterruptedException {
+        Thread.sleep(3000);
+        driver.findElement(By.linkText("Recruitment")).click();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//div[contains(@class,\"space\")]//following::div[contains(@class,\"active\")][4]")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//span[normalize-space()='Shortlisted']")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//button[normalize-space()='Search']")).click();
+
+    }
+
+    @And("I click on the view icon in the Actions section to see a candidates's application Shortlisted")
+    public void iClickOnTheViewIconInTheActionsSectionToSeeACandidatesSApplicationShortlisted() throws InterruptedException {
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//button[contains(@class,\"space\")]//following::i[contains(@class,\"fill\")][1]")).click();
+
+    }
+
+    @And("I click the Schedule interview button for the candidate")
+    public void iClickTheScheduleInterviewButtonForTheCandidate() throws InterruptedException {
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//button[normalize-space()='Schedule Interview']")).click();
+
+    }
+
+    @And("I add the title of the interview")
+    public void iAddTheTitleOfTheInterview() throws InterruptedException {
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//div[contains(@class,\"gutters\")]//following::input[contains(@class,\"active\")][5]")).sendKeys("Interview Test");
+    }
+
+    @And("I add two interviewers int the interviewer field")
+    public void iAddTwoInterviewersIntTheInterviewerField() throws InterruptedException {
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//div[contains(@class,\"gutters\")]//following::input[@include-employees='onlyCurrent'][1]")).sendKeys("Peter Mac Anderson");
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//span[normalize-space()='Peter Mac Anderson']")).click();
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//button[normalize-space()='Add Another']")).click();
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//div[contains(@class,\"gutters\")]//following::input[@include-employees='onlyCurrent'][2]")).sendKeys("Charlie  Carter");
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//span[normalize-space()='Charlie Carter']")).click();
+    }
+
+    @And("I select a date and hour")
+    public void iSelectADateAndHour() throws InterruptedException {
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//input[@placeholder='yyyy-mm-dd']")).sendKeys("2023-09-12");
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//input[@placeholder='hh:mm']")).sendKeys("02:00 PM");
+    }
+    @And("I press the Save button to schedule the interview")
+    public void iPressTheSaveButtonToScheduleTheInterview() throws InterruptedException {
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//button[normalize-space()='Save']")).click();
+    }
+
+    @Then("I should see the confirmation message for this interview")
+    public void iShouldSeeTheConfirmationMessageForThisInterview() throws InterruptedException {
+        Thread.sleep(2001);
+        driver.findElement(By.xpath("//p[normalize-space()='Successfully Updated']")).isDisplayed();
+
+    }
+
+    @And("I click on the Vacancies option")
+    public void iClickOnTheVacanciesOption() throws InterruptedException {
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//a[normalize-space()='Vacancies']")).click();
+    }
+
+    @And("I search for vacancies with job title Account Assistant")
+    public void iSearchForVacanciesWithJobTitleAccountAssistant() throws InterruptedException {
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//div[contains(@class,\"grid\")]//following::div[contains(@class,\"after\")][1]")).click();
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//span[normalize-space()='Account Assistant']")).click();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//button[normalize-space()='Search']")).click();
+    }
+    @Then("I can see that all records are displayed for Account Assistant")
+    public void iCanSeeThatAllRecordsAreDisplayedForAccountAssistant() throws InterruptedException {
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//div[contains(@class,\"border\")]//following::div[contains(@class,\"cell\")][10]//*[ contains (text(), \"Account Assistant\")]")).isDisplayed();
+    }
+
+    @Given("I click on the PIM option from the menu")
+    public void iClickOnThePIMOptionFromTheMenu() throws InterruptedException {
+        Thread.sleep(3000);
+        driver.findElement(By.linkText("PIM")).click();
+    }
+
+    @And("I choose the Add Employee option")
+    public void iChooseTheAddEmployeeOption() throws InterruptedException {
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//button[normalize-space()='Add']")).click();
+    }
+
+    @And("I add a profile picture for that employee")
+    public void iAddAProfilePictureForThatEmployee() throws InterruptedException {
+        Thread.sleep(5000);
+        String filePath="/Users/adinica/Desktop/AutoFrameworkBootcamp/picture/pictures/Screenshot 2023-08-23 at 14.31.16.png";
+        Thread.sleep(4500);
+        WebElement uploadFile = driver.findElement(By.xpath("//input[@type='file']"));
+        Thread.sleep(3000);
+        uploadFile.sendKeys(filePath);
+    }
+
+    @And("I enter the employee full name in the Employee section")
+    public void iEnterTheEmployeeFullNameInTheEmployeeSection() throws InterruptedException {
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//input[@placeholder='First Name']")).sendKeys("Sonic");
+        Thread.sleep(1500);
+        driver.findElement(By.xpath("//input[@placeholder='Middle Name']")).sendKeys("The");
+        Thread.sleep(1500);
+        driver.findElement(By.xpath("//input[@placeholder='Last Name']")).sendKeys("Hedgehog");
+    }
+
+    @And("I enter an employee id in the id field")
+    public void iEnterAnEmployeeIdInTheIdField() throws InterruptedException {
+        Thread.sleep(4000);
+        //WebElement idfield =driver.findElement(By.xpath("//div[contains(@class,\"space\")]//following::input[contains(@class,\"active\")][4]"));
+        WebElement idfield = driver.findElement(By.xpath("//div[@class='oxd-input-group oxd-input-field-bottom-space']//div//input[@class='oxd-input oxd-input--active']"));
+        idfield.sendKeys(Keys.SHIFT,Keys.ARROW_UP);
+        idfield.sendKeys(Keys.DELETE);
+        Thread.sleep(1500);
+        Random rand = new Random();
+        int value = rand.nextInt(4000,9999);
+        String id = Integer.toString(value);
+        idfield.sendKeys(id);
+    }
+
+    @And("I click on the Create Login Details button to make the option available")
+    public void iClickOnTheCreateLoginDetailsButtonToMakeTheOptionAvailable() throws InterruptedException {
+        Thread.sleep(3000);
+        //driver.findElement(By.xpath("//div[contains(@class,\"wrapper\")]//following::input[@type='checkbox']")).click();
+        driver.findElement(By.xpath("//span[@class='oxd-switch-input oxd-switch-input--active --label-right']")).click();
+    }
+
+    @And("I add a username and password")
+    public void iAddAUsernameAndPassword() throws InterruptedException {
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//div[contains(@class,\"space\")]//following::input[contains(@class,\"active\")][5]")).sendKeys("TheBoss");
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//div[contains(@class,\"space\")]//following::input[contains(@class,\"active\")][6]")).sendKeys("admin123");
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//div[contains(@class,\"space\")]//following::input[contains(@class,\"active\")][7]")).sendKeys("admin123");
+
+    }
+    @And("I press the Save button PIM")
+    public void iPressTheSaveButtonPIM() throws InterruptedException {
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//button[normalize-space()='Save']")).click();
+    }
+
+    @Then("I should see a confirmation message that the employee was successfully saved")
+    public void iShouldSeeAConfirmationMessageThatTheEmployeeWasSuccessfullySaved() throws InterruptedException {
+        Thread.sleep(2001);
+        driver.findElement(By.xpath("//p[normalize-space()='Successfully Saved']")).isDisplayed();
+    }
+
+    @Given("I click on Maintenance option from menu")
+    public void iClickOnMaintenanceOptionFromMenu() throws InterruptedException {
+        Thread.sleep(3000);
+        driver.findElement(By.linkText("Maintenance")).click();
+
+    }
+
+    @And("I enter the password to validate the admin credentials")
+    public void iEnterThePasswordToValidateTheAdminCredentials() throws InterruptedException {
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//input[@name='password']")).sendKeys("admin123");
+    }
+
+    @And("I click the Confirm button")
+    public void iClickTheConfirmButton() throws InterruptedException {
+        Thread.sleep(1500);
+        driver.findElement(By.xpath("//button[normalize-space()='Confirm']")).click();
+    }
+
+    @And("I click on the Access Records option")
+    public void iClickOnTheAccessRecordsOption() throws InterruptedException {
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//a[normalize-space()='Access Records']")).click();
+    }
+
+    @And("I enter Anthony Anadebe in the Employee Name")
+    public void iEnterAnthonyAnadebeInTheEmployeeName() throws InterruptedException {
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//input[@placeholder='Type for hints...']")).sendKeys("Peter Mac Anderson");
+        Thread.sleep(1500);
+        driver.findElement(By.xpath("//span[normalize-space()='Peter Mac Anderson']")).click();
+    }
+
+    @And("I click on the Search button")
+    public void iClickOnTheSearchButton() throws InterruptedException {
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//button[normalize-space()='Search']")).click();
+    }
+
+    @Then("I can see that the employee ID is displayed")
+    public void iCanSeeThatTheEmployeeIDIsDisplayed() throws InterruptedException {
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//div[@class='oxd-input-group oxd-input-field-bottom-space']//div//input[@class='oxd-input oxd-input--active']")).isDisplayed();
+
+    }
+
+    @And("I click on the Leave List option")
+    public void iClickOnTheLeaveListOption() throws InterruptedException {
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//a[normalize-space()='Leave List']")).click();
+
+    }
+
+    @And("I selected Rejected Status by filtering the Show Leave Section")
+    public void iSelectedRejectedStatusByFilteringTheShowLeaveSection() throws InterruptedException {
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//div[@class='oxd-multiselect-wrapper']//i[@class='oxd-icon bi-caret-down-fill oxd-select-text--arrow']")).click();
+        Thread.sleep(1500);
+        driver.findElement(By.xpath("//span[normalize-space()='Rejected']")).click();
+    }
+
+    @Then("I check that the Rejected status is present as a selection there")
+    public void iCheckThatTheRejectedStatusIsPresentAsASelectionThere() throws InterruptedException {
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//span[normalize-space()='Rejected']")).isDisplayed();
     }
 }
